@@ -59,12 +59,11 @@ function deleteMovie(req, res, next) {
     .orFail(() => new NotFound('Ресурс не найден'))
     .then((movie) => {
       if (movie.owner.toString() === req.user._id) {
-        movie.remove()
-          .then(() => res.status(200).send(movie))
-          .catch(next);
+        return movie.remove()
+          .then(() => res.status(200).send(movie));
       }
 
-      next(new Forbidden('Доступ запрещён'));
+      return next(new Forbidden('Доступ запрещён'));
     })
     .catch(next);
 }
