@@ -15,13 +15,7 @@ function getUser(req, res, next) {
     .findById(owner)
     .orFail(() => new NotFound('Ресурс не найден'))
     .then((user) => res.status(200).send(user))
-    .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
-        next(new BadRequest('Переданы некорректные данные'));
-      }
-
-      next(err);
-    });
+    .catch(next);
 }
 
 function createUser(req, res, next) {
@@ -43,9 +37,9 @@ function createUser(req, res, next) {
         next(new BadRequest('Переданы некорректные данные'));
       } else if (err.code === 11000) {
         next(new Conflict('Пользователь с таким email существует'));
+      } else {
+        next(err);
       }
-
-      next(err);
     });
 }
 
@@ -94,9 +88,9 @@ function updateProfile(req, res, next) {
         next(new BadRequest('Переданы некорректные данные'));
       } else if (err.code === 11000) {
         next(new Conflict('Пользователь с таким email существует'));
+      } else {
+        next(err);
       }
-
-      next(err);
     });
 }
 

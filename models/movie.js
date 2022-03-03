@@ -18,7 +18,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  direction: {
+  director: {
     type: String,
     required: true,
   },

@@ -16,7 +16,7 @@ function createMovie(req, res, next) {
     nameRU,
     nameEN,
     country,
-    direction,
+    director,
     duration,
     year,
     description,
@@ -32,7 +32,7 @@ function createMovie(req, res, next) {
       nameRU,
       nameEN,
       country,
-      direction,
+      director,
       duration,
       year,
       description,
@@ -45,9 +45,9 @@ function createMovie(req, res, next) {
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
         next(new BadRequest('Переданы некорректные данные'));
+      } else {
+        next(err);
       }
-
-      next(err);
     });
 }
 
