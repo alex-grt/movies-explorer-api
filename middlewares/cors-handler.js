@@ -3,6 +3,7 @@ const allowedOrigins = [
   'https://movies-explorer.agrt.nomoredomains.work',
   'http://51.250.16.166',
   'https://51.250.16.166',
+  'http://localhost:3001',
 ];
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,POST,PUT,PATCH,DELETE';
 
